@@ -1,0 +1,25 @@
+services:
+  rag:
+    container_name: rag
+    image: oracionxi/rag-app
+    restart: always
+    ports:
+      - 8000:8000
+    environment:
+      MODEL_NAME: tinyllama
+    volumes:
+      - chroma-data:/app/db
+    networks:
+      - shared-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      retries: 3
+      timeout: 10s
+
+networks:
+  shared-network:
+    driver: bridge
+
+volumes:
+  chroma-data:
