@@ -4,7 +4,8 @@ import os
 import logging
 from ollama import Client
 
-ollama_client = Client(host="http://host.docker.internal:11434")
+# http://host.docker.internal:11434
+ollama_client = Client(host="http://127.0.0.1:11434") 
 
 app = FastAPI()
 chroma = chromadb.PersistentClient(path="./db")
